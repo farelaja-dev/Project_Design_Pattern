@@ -199,7 +199,7 @@ if __name__ == "__main__":
         customers = db1.execute_query_dict("SELECT * FROM customers LIMIT 5")
         print(f"\nSample customers:")
         for customer in customers:
-            member_status = "👑 Member" if customer["is_member"] else "Regular"
+            member_status = "Member" if customer["is_member"] else "Regular"
             print(f"  - {customer['name']} ({customer['phone']}) - {member_status}")
 
         # Get sample menu

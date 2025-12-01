@@ -463,17 +463,17 @@ if __name__ == "__main__":
         # Export to PDF
         print("\n" + "=" * 70)
         pdf_path = service.export_report(order_id, "pdf", "exports")
-        print(f"✓ PDF exported successfully")
+        print(f"PDF exported successfully")
 
         # Export to Excel
         print("\n" + "=" * 70)
         excel_path = service.export_report(order_id, "excel", "exports")
-        print(f"✓ Excel exported successfully")
+        print(f"Excel exported successfully")
 
         # Export to JSON
         print("\n" + "=" * 70)
         json_path = service.export_report(order_id, "json", "exports")
-        print(f"✓ JSON exported successfully")
+        print(f"JSON exported successfully")
 
         # Show all reports
         print("\n" + "=" * 70)

@@ -302,7 +302,7 @@ if __name__ == "__main__":
             description="Rendang daging sapi dengan bumbu rempah pilihan",
             category="main_course",
         )
-        print(f"✓ Created: {food}")
+        print(f"Created: {food}")
 
         # Beverage Item
         beverage = service.create_menu_item(
@@ -313,7 +313,7 @@ if __name__ == "__main__":
             description="Kopi susu dengan gula aren original",
             size="regular",
         )
-        print(f"✓ Created: {beverage}")
+        print(f"Created: {beverage}")
 
         # Package Item
         package = service.create_menu_item(
@@ -324,7 +324,7 @@ if __name__ == "__main__":
             description="Nasi Goreng + Ayam Goreng + Es Teh + Kerupuk",
             items_included=["Nasi Goreng", "Ayam Goreng", "Es Teh", "Kerupuk"],
         )
-        print(f"✓ Created: {package}")
+        print(f"Created: {package}")
 
         # Get menu by type
         print("\n" + "=" * 70)

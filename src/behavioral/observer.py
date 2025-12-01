@@ -64,14 +64,14 @@ class KitchenDisplayObserver(Observer):
         timestamp = datetime.now().strftime("%H:%M:%S")
 
         if event_type == "created":
-            print(f"[🍳 KITCHEN - {timestamp}] NEW ORDER #{order.order_id}")
+            print(f"[KITCHEN - {timestamp}] NEW ORDER #{order.order_id}")
             print(f"   Customer: {order.customer_id}")
             print(f"   Items: {len(order.items) if hasattr(order, 'items') else 'N/A'}")
             print(f"   Priority: {'HIGH' if order.total_amount > 100000 else 'NORMAL'}")
             print(f"   Message: {message}")
 
         elif event_type == "cancelled":
-            print(f"[🍳 KITCHEN - {timestamp}] ORDER CANCELLED #{order.order_id}")
+            print(f"[KITCHEN - {timestamp}] ORDER CANCELLED #{order.order_id}")
             print(f"   Stop preparation!")
 
     def get_observer_name(self) -> str:
@@ -88,12 +88,12 @@ class CashierNotificationObserver(Observer):
         timestamp = datetime.now().strftime("%H:%M:%S")
 
         if event_type == "created":
-            print(f"[💰 CASHIER - {timestamp}] Payment Ready #{order.order_id}")
+            print(f"[CASHIER - {timestamp}] Payment Ready #{order.order_id}")
             print(f"   Amount: Rp {order.total_amount:,.0f}")
             print(f"   Payment Method: {getattr(order, 'payment_method', 'Cash')}")
 
         elif event_type == "completed":
-            print(f"[💰 CASHIER - {timestamp}] Payment Completed #{order.order_id}")
+            print(f"[CASHIER - {timestamp}] Payment Completed #{order.order_id}")
             print(f"   Transaction Successful")
 
     def get_observer_name(self) -> str:
@@ -110,18 +110,16 @@ class WaiterAlertObserver(Observer):
         timestamp = datetime.now().strftime("%H:%M:%S")
 
         if event_type == "created":
-            print(f"[👨‍🍳 WAITER - {timestamp}] New Order Received #{order.order_id}")
+            print(f"[WAITER - {timestamp}] New Order Received #{order.order_id}")
             print(f"   Table: {getattr(order, 'table_number', 'Takeaway')}")
             print(f"   Message: {message}")
 
         elif event_type == "ready":
-            print(
-                f"[👨‍🍳 WAITER - {timestamp}] Order Ready for Delivery #{order.order_id}"
-            )
+            print(f"[WAITER - {timestamp}] Order Ready for Delivery #{order.order_id}")
             print(f"   Please deliver to table!")
 
         elif event_type == "completed":
-            print(f"[👨‍🍳 WAITER - {timestamp}] Order Completed #{order.order_id}")
+            print(f"[WAITER - {timestamp}] Order Completed #{order.order_id}")
             print(f"   Thank you for serving!")
 
     def get_observer_name(self) -> str:
@@ -140,17 +138,17 @@ class SMSNotificationObserver(Observer):
 
         if event_type == "created":
             sms_message = f"Order #{order.order_id} received. Total: Rp {order.total_amount:,.0f}. Estimated time: 20 mins."
-            print(f"[📱 SMS - {timestamp}] Sending to {customer_phone}")
+            print(f"[SMS - {timestamp}] Sending to {customer_phone}")
             print(f"   Message: {sms_message}")
 
         elif event_type == "ready":
             sms_message = f"Your order #{order.order_id} is ready! Please pick up or it will be delivered soon."
-            print(f"[📱 SMS - {timestamp}] Sending to {customer_phone}")
+            print(f"[SMS - {timestamp}] Sending to {customer_phone}")
             print(f"   Message: {sms_message}")
 
         elif event_type == "completed":
             sms_message = f"Thank you for your order #{order.order_id}! We hope you enjoyed your meal. Rate us!"
-            print(f"[📱 SMS - {timestamp}] Sending to {customer_phone}")
+            print(f"[SMS - {timestamp}] Sending to {customer_phone}")
             print(f"   Message: {sms_message}")
 
     def get_observer_name(self) -> str:
@@ -168,12 +166,12 @@ class EmailNotificationObserver(Observer):
         customer_email = getattr(order, "customer_email", "customer@example.com")
 
         if event_type == "created":
-            print(f"[📧 EMAIL - {timestamp}] Sending receipt to {customer_email}")
+            print(f"[EMAIL - {timestamp}] Sending receipt to {customer_email}")
             print(f"   Subject: Order Confirmation #{order.order_id}")
             print(f"   Order details and receipt attached")
 
         elif event_type == "completed":
-            print(f"[📧 EMAIL - {timestamp}] Sending to {customer_email}")
+            print(f"[EMAIL - {timestamp}] Sending to {customer_email}")
             print(f"   Subject: Thank You for Your Order #{order.order_id}")
             print(f"   Feedback form link included")
 
@@ -202,10 +200,10 @@ class AuditLogObserver(Observer):
             with open(self.log_file, "a", encoding="utf-8") as f:
                 f.write(log_entry)
             print(
-                f"[📝 AUDIT LOG] Logged: {event_type.upper()} for Order #{order.order_id}"
+                f"[AUDIT LOG] Logged: {event_type.upper()} for Order #{order.order_id}"
             )
         except Exception as e:
-            print(f"[📝 AUDIT LOG] Error writing log: {e}")
+            print(f"[AUDIT LOG] Error writing log: {e}")
 
     def get_observer_name(self) -> str:
         return "Audit Log System"
@@ -221,15 +219,13 @@ class InventoryObserver(Observer):
         timestamp = datetime.now().strftime("%H:%M:%S")
 
         if event_type == "created":
-            print(
-                f"[📦 INVENTORY - {timestamp}] Stock Check for Order #{order.order_id}"
-            )
+            print(f"[INVENTORY - {timestamp}] Stock Check for Order #{order.order_id}")
             print(f"   Checking availability...")
             print(f"   Updating stock levels...")
 
         elif event_type == "cancelled":
             print(
-                f"[📦 INVENTORY - {timestamp}] Restoring Stock for Order #{order.order_id}"
+                f"[INVENTORY - {timestamp}] Restoring Stock for Order #{order.order_id}"
             )
             print(f"   Items returned to inventory")
 

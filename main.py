@@ -59,16 +59,15 @@ class RestaurantApp:
         """Display main menu"""
         self.clear_screen()
         self.print_header("SISTEM MANAJEMEN RESTORAN")
-        print("\n🏪 Menu Utama:")
-        print("  1. 📋 Kelola Menu Makanan (Factory Pattern)")
-        print("  2. 🛒 Buat Pesanan Baru")
-        print("  3. ✨ Kustomisasi Menu (Decorator Pattern)")
-        print("  4. 💰 Terapkan Diskon (Strategy Pattern)")
-        print("  5. 📊 Generate Laporan (Adapter Pattern)")
-        print("  6. 🔔 Lihat Notifikasi (Observer Pattern)")
-        print("  7. 👥 Kelola Pelanggan")
-        print("  8. 💾 Info Database (Singleton Pattern)")
-        print("  0. 🚪 Keluar")
+        print("\nMenu Utama:")
+        print("  1. Kelola Menu Makanan (Factory Pattern)")
+        print("  2. Kustomisasi Menu (Decorator Pattern)")
+        print("  3. Terapkan Diskon (Strategy Pattern)")
+        print("  4. Generate Laporan (Adapter Pattern)")
+        print("  5. Lihat Notifikasi (Observer Pattern)")
+        print("  6. Kelola Pelanggan")
+        print("  7. Info Database (Singleton Pattern)")
+        print("  0. Keluar")
         print("=" * 70)
 
     # ========================= FACTORY PATTERN =========================
@@ -79,7 +78,7 @@ class RestaurantApp:
             self.clear_screen()
             self.print_header("KELOLA MENU (Factory Pattern)")
 
-            print("\n📋 Pilihan Menu:")
+            print("\nPilihan Menu:")
             print("  1. Lihat Semua Menu")
             print("  2. Lihat Menu Berdasarkan Tipe")
             print("  3. Tambah Menu Baru")
@@ -110,20 +109,20 @@ class RestaurantApp:
         menus = self.menu_service.get_all_menu()
 
         if not menus:
-            print("\n⚠️  Tidak ada menu yang ditemukan!")
+            print("\nTidak ada menu yang ditemukan!")
         else:
             current_type = None
             for menu in menus:
                 if menu["item_type"] != current_type:
                     current_type = menu["item_type"]
                     print(f"\n{'='*70}")
-                    print(f"📁 {current_type.upper()}")
+                    print(f"{current_type.upper()}")
                     print(f"{'='*70}")
 
                 print(f"  [{menu['item_id']}] {menu['item_name']}")
-                print(f"      💵 Rp {float(menu['base_price']):,.0f}")
+                print(f"      Rp {float(menu['base_price']):,.0f}")
                 if menu["description"]:
-                    print(f"      📝 {menu['description']}")
+                    print(f"      {menu['description']}")
 
         self.press_enter()
 
@@ -142,7 +141,7 @@ class RestaurantApp:
             menus = self.menu_service.get_menu_by_type(item_type)
 
             if not menus:
-                print(f"\n⚠️  Menu {item_type} tidak ditemukan!")
+                print(f"\nMenu {item_type} tidak ditemukan!")
             else:
                 print(f"\n{'='*70}")
                 print(f"{item_type.upper()} MENU")
@@ -150,11 +149,11 @@ class RestaurantApp:
 
                 for menu in menus:
                     print(f"\n  [{menu.item_id}] {menu.item_name}")
-                    print(f"      💵 Rp {menu.base_price:,.0f}")
-                    print(f"      📝 {menu.description}")
+                    print(f"      Rp {menu.base_price:,.0f}")
+                    print(f"      {menu.description}")
 
         except Exception as e:
-            print(f"\n❌ Error: {e}")
+            print(f"\nError: {e}")
 
         self.press_enter()
 
@@ -186,13 +185,13 @@ class RestaurantApp:
                 description=description,
             )
 
-            print(f"\n✅ Menu berhasil ditambahkan!")
+            print(f"\nMenu berhasil ditambahkan!")
             print(f"   ID: {menu_item.item_id}")
             print(f"   Nama: {menu_item.item_name}")
             print(f"   Harga: Rp {menu_item.base_price:,.0f}")
 
         except Exception as e:
-            print(f"\n❌ Error: {e}")
+            print(f"\nError: {e}")
 
         self.press_enter()
 
@@ -207,7 +206,7 @@ class RestaurantApp:
             # Get current item
             current = self.menu_service.get_menu_item(item_id)
             if not current:
-                print(f"\n❌ Menu {item_id} tidak ditemukan!")
+                print(f"\nMenu {item_id} tidak ditemukan!")
                 self.press_enter()
                 return
 
@@ -226,10 +225,10 @@ class RestaurantApp:
                 description=new_desc if new_desc else None,
             )
 
-            print(f"\n✅ Menu berhasil diupdate!")
+            print(f"\nMenu berhasil diupdate!")
 
         except Exception as e:
-            print(f"\n❌ Error: {e}")
+            print(f"\nError: {e}")
 
         self.press_enter()
 
@@ -249,12 +248,12 @@ class RestaurantApp:
 
             if confirm == "ya":
                 self.menu_service.delete_menu_item(item_id)
-                print(f"\n✅ Menu berhasil dihapus!")
+                print(f"\nMenu berhasil dihapus!")
             else:
-                print("\n❌ Penghapusan dibatalkan.")
+                print("\nPenghapusan dibatalkan.")
 
         except Exception as e:
-            print(f"\n❌ Error: {e}")
+            print(f"\nError: {e}")
 
         self.press_enter()
 
@@ -278,7 +277,7 @@ class RestaurantApp:
 
             base_item = self.menu_service.get_menu_item(item_id)
             if not base_item:
-                print(f"\n❌ Menu tidak ditemukan!")
+                print(f"\nMenu tidak ditemukan!")
                 self.press_enter()
                 return
 
@@ -287,7 +286,7 @@ class RestaurantApp:
             )
 
             # Available decorators
-            print("\n✨ Kustomisasi yang Tersedia:")
+            print("\nKustomisasi yang Tersedia:")
             print("  1. Extra Keju (+Rp 5,000)")
             print("  2. Extra Topping")
             print("  3. Ukuran Besar (+Rp 10,000)")
@@ -302,18 +301,18 @@ class RestaurantApp:
                     break
                 elif choice == "1":
                     decorators_config.append({"type": "cheese"})
-                    print("  ✓ Ditambahkan: Extra Keju")
+                    print("  Ditambahkan: Extra Keju")
                 elif choice == "2":
                     topping_name = input("  Nama topping: ").strip()
                     decorators_config.append({"type": "topping", "name": topping_name})
-                    print(f"  ✓ Ditambahkan: Extra {topping_name}")
+                    print(f"  Ditambahkan: Extra {topping_name}")
                 elif choice == "3":
                     decorators_config.append({"type": "large"})
-                    print("  ✓ Ditambahkan: Ukuran Besar")
+                    print("  Ditambahkan: Ukuran Besar")
                 elif choice == "4":
                     level = int(input("  Level pedas (1-5): ").strip())
                     decorators_config.append({"type": "spicy", "level": level})
-                    print(f"  ✓ Ditambahkan: Extra Pedas Level {level}")
+                    print(f"  Ditambahkan: Extra Pedas Level {level}")
 
             if decorators_config:
                 # Apply decorators
@@ -327,15 +326,15 @@ class RestaurantApp:
                 print(f"{customized}")
 
                 # Show breakdown
-                print(f"\n💰 Rincian Harga:")
+                print(f"\nRincian Harga:")
                 breakdown = MenuDecoratorService.get_price_breakdown(customized)
                 for item in breakdown["items"]:
-                    print(f"  • {item['name']}: Rp {item['price']:,.0f}")
+                    print(f"  {item['name']}: Rp {item['price']:,.0f}")
                 print(f"  {'-'*60}")
                 print(f"  TOTAL: Rp {breakdown['total']:,.0f}")
 
         except Exception as e:
-            print(f"\n❌ Error: {e}")
+            print(f"\nError: {e}")
 
         self.press_enter()
 
@@ -349,7 +348,7 @@ class RestaurantApp:
         try:
             original_amount = float(input("Masukkan jumlah awal: Rp ").strip())
 
-            print("\n💰 Strategi Diskon yang Tersedia:")
+            print("\nStrategi Diskon yang Tersedia:")
             print("  1. Diskon Member (5-15%)")
             print("  2. Diskon Promo (Potongan Rp 20,000 untuk min Rp 100,000)")
             print("  3. Diskon Voucher (20% off, maks Rp 50,000)")
@@ -381,7 +380,7 @@ class RestaurantApp:
                 )
 
             else:
-                print("\n❌ Pilihan tidak valid!")
+                print("\nPilihan tidak valid!")
                 self.press_enter()
                 return
 
@@ -397,7 +396,7 @@ class RestaurantApp:
             )
 
         except Exception as e:
-            print(f"\n❌ Error: {e}")
+            print(f"\nError: {e}")
 
         self.press_enter()
 
@@ -414,7 +413,7 @@ class RestaurantApp:
             orders = self.db.execute_query_dict(query)
 
             if not orders:
-                print("\n⚠️  Tidak ada pesanan yang ditemukan!")
+                print("\nTidak ada pesanan yang ditemukan!")
                 self.press_enter()
                 return
 
@@ -427,7 +426,7 @@ class RestaurantApp:
             order_id = int(input("\nMasukkan ID pesanan untuk di-export: ").strip())
 
             print(
-                "\n📄 Format yang Tersedia:",
+                "\nFormat yang Tersedia:",
                 ", ".join(self.report_service.get_supported_formats()),
             )
             format_type = input("Pilih format: ").strip().lower()
@@ -437,12 +436,12 @@ class RestaurantApp:
                 order_id, format_type, "exports"
             )
 
-            print(f"\n✅ Laporan berhasil di-export!")
+            print(f"\nLaporan berhasil di-export!")
             print(f"   Path: {exported_path}")
             print(f"   Format: {format_type.upper()}")
 
         except Exception as e:
-            print(f"\n❌ Error: {e}")
+            print(f"\nError: {e}")
 
         self.press_enter()
 
@@ -453,15 +452,15 @@ class RestaurantApp:
         self.clear_screen()
         self.print_header("NOTIFIKASI PESANAN (Observer Pattern)")
 
-        print("\n🔔 Demonstrasi Observer Pattern:")
+        print("\nDemonstrasi Observer Pattern:")
         print("    Ketika pesanan dibuat, beberapa sistem akan otomatis dinotifikasi:")
-        print("    • Sistem Display Dapur")
-        print("    • Notifikasi Kasir")
-        print("    • Alert Pelayan")
-        print("    • Notifikasi SMS")
-        print("    • Notifikasi Email")
-        print("    • Log Audit")
-        print("    • Manajemen Inventori")
+        print("    - Sistem Display Dapur")
+        print("    - Notifikasi Kasir")
+        print("    - Alert Pelayan")
+        print("    - Notifikasi SMS")
+        print("    - Notifikasi Email")
+        print("    - Log Audit")
+        print("    - Manajemen Inventori")
 
         test = input("\nJalankan demo notifikasi? (ya/tidak): ").strip().lower()
 
@@ -481,7 +480,7 @@ class RestaurantApp:
             )
 
             print(f"\n{'='*70}")
-            print("✅ Semua observer berhasil dinotifikasi!")
+            print("Semua observer berhasil dinotifikasi!")
             print(f"{'='*70}")
 
         self.press_enter()
@@ -496,9 +495,9 @@ class RestaurantApp:
         query = "SELECT * FROM customers ORDER BY customer_id"
         customers = self.db.execute_query_dict(query)
 
-        print("\n👥 Pelanggan:")
+        print("\nPelanggan:")
         for customer in customers:
-            status = "⭐ Member" if customer["is_member"] else "Reguler"
+            status = "Member" if customer["is_member"] else "Reguler"
             print(f"  [{customer['customer_id']}] {customer['name']} - {status}")
 
         self.press_enter()
@@ -508,25 +507,25 @@ class RestaurantApp:
         self.clear_screen()
         self.print_header("INFO DATABASE (Singleton Pattern)")
 
-        print("\n💾 Database Connection Pool (Singleton):")
+        print("\nDatabase Connection Pool (Singleton):")
         print(f"   Database: {getattr(self.db, 'dbname', 'N/A')}")
         print(f"   User: {getattr(self.db, 'user', 'N/A')}")
         print(
             f"   Host: {getattr(self.db, 'host', 'N/A')}:{getattr(self.db, 'port', 'N/A')}"
         )
         print(
-            f"   Status: {'Terhubung ✓' if getattr(self.db, '_is_connected', False) else 'Tidak Terhubung ✗'}"
+            f"   Status: {'Terhubung' if getattr(self.db, '_is_connected', False) else 'Tidak Terhubung'}"
         )
 
         # Test singleton
-        print("\n🔬 Testing Singleton Pattern:")
+        print("\nTesting Singleton Pattern:")
         db2 = DatabaseConnection()
-        print(f"   Instance yang sama? {self.db is db2} ✓")
+        print(f"   Instance yang sama? {self.db is db2}")
         print(f"   Alamat memori: {hex(id(self.db))}")
 
         # Show table stats
         if getattr(self.db, "_is_connected", False):
-            print("\n📊 Statistik Database:")
+            print("\nStatistik Database:")
 
             queries = [
                 ("Pelanggan", "SELECT COUNT(*) FROM customers"),
@@ -544,7 +543,7 @@ class RestaurantApp:
                 except:
                     print(f"   {name}: N/A")
         else:
-            print("\n⚠️  Database tidak terhubung. Silakan cek konfigurasi .env:")
+            print("\nDatabase tidak terhubung. Silakan cek konfigurasi .env:")
             print(f"   - DB_HOST: {getattr(self.db, 'host', 'N/A')}")
             print(f"   - DB_PORT: {getattr(self.db, 'port', 'N/A')}")
             print(f"   - DB_NAME: {getattr(self.db, 'dbname', 'N/A')}")
@@ -564,26 +563,23 @@ class RestaurantApp:
             if choice == "1":
                 self.menu_management()
             elif choice == "2":
-                print("\n⚠️  Fitur pembuatan pesanan - Segera hadir!")
-                self.press_enter()
-            elif choice == "3":
                 self.customize_menu()
-            elif choice == "4":
+            elif choice == "3":
                 self.apply_discounts()
-            elif choice == "5":
+            elif choice == "4":
                 self.generate_reports()
-            elif choice == "6":
+            elif choice == "5":
                 self.view_notifications()
-            elif choice == "7":
+            elif choice == "6":
                 self.manage_customers()
-            elif choice == "8":
+            elif choice == "7":
                 self.database_info()
             elif choice == "0":
-                print("\n👋 Terima kasih telah menggunakan Sistem Manajemen Restoran!")
+                print("\nTerima kasih telah menggunakan Sistem Manajemen Restoran!")
                 print("   Sampai jumpa!\n")
                 break
             else:
-                print("\n❌ Pilihan tidak valid! Silakan coba lagi.")
+                print("\nPilihan tidak valid! Silakan coba lagi.")
                 self.press_enter()
 
 
@@ -592,7 +588,7 @@ if __name__ == "__main__":
     print("SISTEM MANAJEMEN RESTORAN")
     print("Implementasi Design Patterns dalam Python")
     print("=" * 70)
-    print("\n⚠️  Pastikan database PostgreSQL sudah berjalan dan terkonfigurasi!")
+    print("\nPastikan database PostgreSQL sudah berjalan dan terkonfigurasi!")
     print("   Setup database: database/schema.sql")
     print("   Environment: file .env\n")
 
@@ -600,7 +596,7 @@ if __name__ == "__main__":
         app = RestaurantApp()
         app.run()
     except KeyboardInterrupt:
-        print("\n\n👋 Aplikasi dihentikan. Sampai jumpa!\n")
+        print("\n\nAplikasi dihentikan. Sampai jumpa!\n")
     except Exception as e:
-        print(f"\n❌ Fatal Error: {e}")
+        print(f"\nFatal Error: {e}")
         print("   Silakan cek koneksi dan konfigurasi database.\n")

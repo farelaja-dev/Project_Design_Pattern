@@ -111,12 +111,12 @@ class PromoDiscountStrategy(PricingStrategy):
     def calculate_discount(self, original_amount: float, **kwargs) -> float:
         if original_amount >= self.minimum_purchase:
             print(
-                f"[PROMO DISCOUNT] Min Purchase: Rp {self.minimum_purchase:,.0f} ✓ | Discount: Rp {self.discount_amount:,.0f}"
+                f"[PROMO DISCOUNT] Min Purchase: Rp {self.minimum_purchase:,.0f} | Discount: Rp {self.discount_amount:,.0f}"
             )
             return self.discount_amount
         else:
             print(
-                f"[PROMO DISCOUNT] Min Purchase: Rp {self.minimum_purchase:,.0f} ✗ | Need: Rp {self.minimum_purchase - original_amount:,.0f} more"
+                f"[PROMO DISCOUNT] Min Purchase: Rp {self.minimum_purchase:,.0f} | Need: Rp {self.minimum_purchase - original_amount:,.0f} more"
             )
             return 0
 
@@ -172,12 +172,12 @@ class HappyHourStrategy(PricingStrategy):
         if self.start_time <= current_time <= self.end_time:
             discount = original_amount * self.discount_percentage
             print(
-                f"[HAPPY HOUR] Time: {current_time.strftime('%H:%M')} ✓ | Rate: {self.discount_percentage*100}% | Discount: Rp {discount:,.0f}"
+                f"[HAPPY HOUR] Time: {current_time.strftime('%H:%M')} | Rate: {self.discount_percentage*100}% | Discount: Rp {discount:,.0f}"
             )
             return discount
         else:
             print(
-                f"[HAPPY HOUR] Time: {current_time.strftime('%H:%M')} ✗ | Happy Hour: {self.start_time.strftime('%H:%M')} - {self.end_time.strftime('%H:%M')}"
+                f"[HAPPY HOUR] Time: {current_time.strftime('%H:%M')} | Happy Hour: {self.start_time.strftime('%H:%M')} - {self.end_time.strftime('%H:%M')}"
             )
             return 0
 
@@ -200,7 +200,7 @@ class BirthdayDiscountStrategy(PricingStrategy):
         if is_birthday:
             discount = original_amount * self.discount_percentage
             print(
-                f"[BIRTHDAY DISCOUNT] 🎂 Happy Birthday! | Rate: {self.discount_percentage*100}% | Discount: Rp {discount:,.0f}"
+                f"[BIRTHDAY DISCOUNT] Happy Birthday! | Rate: {self.discount_percentage*100}% | Discount: Rp {discount:,.0f}"
             )
             return discount
         else:
